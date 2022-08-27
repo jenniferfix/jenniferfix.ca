@@ -1,0 +1,24 @@
+:root {
+
+    --progress-pride: linear-gradient(45deg, transparent 0%, transparent 10%, #ffffff 10%, #ffffff 14%, #f7a8b8 14%, #f7a8b8 18%, #55cdfc 18%, #55cdfc 22%, brown 22%, brown 26%, black 26%, black 30%, transparent 30%),
+        linear-gradient(135deg, #ffffff 0%, #ffffff 4%, #f7a8b8 4%, #f7a8b8 8%, #55cdfc 8%, #55cdfc 12%, brown 12%, brown 16%, black 16%, black 20%, transparent 20%),
+        linear-gradient(0deg, #732982 0%, #732982 16.65%, #24408E 16.65%, #24408E 33.3%, #007940 33.3%, #007940 50%, #FDE01A 50%, #FDE01A 66.6%, #F68A1E 66.6%, #F68A1E 83.3%, #D12229 83.3%, #D12229 100%);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: linear-gradient(0deg, #92A8D1 0%, #92A8D1 20%, #F7CAC9 20%, #F7CAC9 40%, #fff 40%, #fff 60%, #F7CAC9 60%, #F7CAC9 80%, #92A8D1 80%, #92A8D1 100%);
+}
