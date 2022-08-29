@@ -114,6 +114,46 @@
            100% 100%;
    }
 
+   .progress-intersex {
+       background-image:
+           radial-gradient(circle,
+               transparent 0%,
+               transparent 25%,
+               #7902AA 25.5%,
+               #7902AA 35%,
+               transparent 35.5%,
+               transparent 100%),
+           linear-gradient(45deg, #fdd817 0%, #fdd817 20%, #ffffff 20%, #ffffff 27.5%, #f7a8b8 27.5%, #f7a8b8 35%, #55cdfc 35%, #55cdfc 42.5%, brown 42.5%, brown 50%, black 50%, black 57.5%, transparent 57.5%),
+           linear-gradient(135deg, #fdd817 0%, #fdd817 20%, #ffffff, 20%, #ffffff 27.5%, #f7a8b8 27.5%, #f7a8b8 35%, #55cdfc 35%, #55cdfc 42.5%, brown 42.5%, brown 50%, black 50%, black 57.5%, transparent 57.5%),
+           linear-gradient(#D12229 0%,
+               #D12229 16.65%,
+               #F68A1E 16.65%,
+               #F68A1E 33%,
+               #FDE01A 33%,
+               #FDE01A 50%,
+               #007940 50%,
+               #007940 66.66%,
+               #24408E 66.66%,
+               #24408E 83.33%,
+               #732982 83.33%,
+               #732982 100%);
+
+       background-position:
+           -10% 50%,
+           0% 0%,
+           /* Top Angles*/
+           0% 100%,
+           0 0;
+
+       /* Main Background */
+       background-size:
+           30% 30%,
+           75% 50%,
+           /* Tp Angles*/
+           75% 50%,
+           100% 100%;
+   }
+
    .asexual {
        background-image: linear-gradient(#000 0%,
                #000 25%,
