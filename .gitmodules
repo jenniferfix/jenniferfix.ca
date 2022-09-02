@@ -1,0 +1,3 @@
+[submodule "src/assets/pride-flags"]
+	path = src/assets/pride-flags
+	url = git@github.com:CodingJen/pride-flags.git
