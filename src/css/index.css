@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 @import './flags.css';
 
 :root {}
@@ -22,14 +23,28 @@ body {
     /* background-image: var(--progress); */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.6rem;
-}
-
-.background {
-    /* filter: blur(2rem);
-    -webkit-filter: blur(2rem); */
-    position: absolute;
     width: 100%;
     height: 100%;
+}
+
+ul {
+    margin: 1em 0 1em 0;
+    padding-left: 30px;
+    font-style: italic;
+}
+
+button {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    box-shadow: inset -2px -2px 3px 2px rgba(0, 0, 0, 0.5);
+    background-image: url(/assets/pride-flags/flags/svg/Pride_Progress.svg);
+}
+
+button:active {
+    box-shadow: inset 2px 2px 3px 2px rgba(0, 0, 0, 0.5);
+    background-image: rgba(0, 0, 0, 1);
 }
 
 .heavy {
@@ -41,33 +56,123 @@ body {
 }
 
 .flag-group {
-    background-color: rgba(255, 255, 255, .6);
-    width: 80%;
-    padding: 1rem;
-    margin: 1rem auto 1rem auto;
-    border-radius: 1rem;
-    display: grid;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 98%;
+    /* padding: 1rem; */
+    margin: 2rem auto 2rem auto;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.3), inset 2px 2px 6px 1px rgba(0, 0, 0, 0.3);
+    ;
+
+    /* display: grid;
     grid-template-rows: auto;
-    grid-template-columns: none auto;
     grid-template-areas:
-        "title title"
-        "flag-image details";
+        "title"
+        "flag-image"
+        "details"; */
 }
+
 
 .flag-title {
     grid-area: title;
+    padding: 1rem 0 0.5rem 2rem;
+    /* margin: 0rem 1rem 0rem 1rem; */
+    border-radius: 1rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    /* box-shadow: inset 2px 2px 4px 3px rgba(0, 0, 0, 0.3); */
 
 }
 
-.flag-image {
-    grid-area: flag-image;
-    background-color: blue;
-}
+.flag-image {}
 
 .svg-image {
     border-radius: 2rem;
+    box-shadow: inset 2px 2px 4px 3px rgba(0, 0, 0, 0.3);
+    grid-area: flag-image;
+    margin: 1rem 1rem 1rem 1rem;
+    pointer-events: none;
 }
 
 .flag-details {
     grid-area: details;
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 2px 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dancer {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+}
+
+.pride {
+    position: relative;
+    font-size: 5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    text-shadow: 1px 1px 3px white;
+    /* background-image: url(/assets/pride-flags/flags/svg/Pride_Progress.svg); */
+}
+
+.pride:active {
+    /* background-image: rgba(0, 0, 0, 1); */
+
+}
+
+/* .pride:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: gradiant(#fff, #000, #fff);
+} */
+
+.hero {
+    font-size: 5rem;
+}
+
+.under-construction {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+}
+
+@media only screen and (min-width: 780px) {
+
+    .flag-group {
+        width: 95%;
+        display: grid;
+        grid-template-columns: min-content auto;
+        grid-template-areas:
+            "title title"
+            "flag-image details";
+    }
+
+
+    .svg-image {
+        width: 400px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .flag-group {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width:1600px) {
+    .flag-group {
+        width: 70%;
+    }
 }
