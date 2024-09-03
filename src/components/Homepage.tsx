@@ -6,7 +6,7 @@ const Homepage = () => {
     <div className="flex justify-center items-center min-h-screen">
       <main>
         <div className="text-xl">Hello, World</div>
-        <div className="text-5xl my-2">I'm Jennifer Fix</div>
+        <div className="text-5xl my-2">I&#39;m Jennifer Fix</div>
         <Socials />
       </main>
     </div>
