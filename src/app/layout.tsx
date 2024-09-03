@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import Header from '@/components/Header'
 import FloatingTheme from '@/components/FloatingTheme'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +21,7 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

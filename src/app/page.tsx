@@ -1,10 +1,5 @@
-import Image from 'next/image'
+import Homepage from '@/components/Homepage'
 
 export default function Home() {
-  return (
-    <main>
-      <div>Hello, World</div>
-      <div className="text-5xl">I'm Jennifer Fix</div>
-    </main>
-  )
+  return <Homepage />
 }
