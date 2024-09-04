@@ -8,9 +8,9 @@ export async function POST(req: Request) {
   console.log(reqData)
   try {
     const { data, error } = await resend.emails.send({
-      from: 'No-Reply <no-reply@jenniferfix.ca>',
+      from: `${reqData.name} <${reqData.email}>`,
       to: ['jenniferashleyfix@gmail.com'],
-      subject: 'TODO Subject',
+      subject: `WebForm: ${reqData.subject}`,
       react: EmailTemplate({
         name: reqData.name,
         email: reqData.email,

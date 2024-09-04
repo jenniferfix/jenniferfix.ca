@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { useFormState } from 'react-dom'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -19,45 +20,65 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
-const formSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  subject: z.string(),
-  message: z.string(),
-})
+import { formSchema } from '@/schemas'
+import { onSubmitAction } from '@/actions/contactFormSubmit'
 
 const MailForm = ({ children }: { children: React.ReactNode }) => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const [dialogOpen, setDialogOpen] = React.useState(false)
+  const [state, formAction] = useFormState(onSubmitAction, { message: '' })
+  const form = useForm<z.output<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
       subject: '',
       message: '',
+      ...(state?.fields ?? {}),
     },
   })
+  const formRef = React.useRef<HTMLFormElement>(null)
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  if (state?.message === 'Sent') {
+    // setDialogOpen(false)
+    formRef.current?.reset()
+    console.log('Sent is back')
   }
-
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Send a message</DialogTitle>
+          <DialogTitle>Email Jennfer</DialogTitle>
+          <DialogDescription>Send me an email</DialogDescription>
         </DialogHeader>
 
         <div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="">
+            {state?.message !== '' && !state.issues && (
+              <div className="">{state.message}</div>
+            )}
+            {state?.issues && (
+              <div className="">
+                <ul>
+                  {state.issues.map((issue) => (
+                    <li key={issue} className="">
+                      {issue}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <form
+              ref={formRef}
+              action={formAction}
+              // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+              className=""
+            >
               <FormField
                 control={form.control}
                 name="name"
@@ -106,7 +127,16 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <div className="flex justify-end gap-2 mt-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <Button type="submit" variant="default">
+                  Submit
+                </Button>
+              </div>
             </form>
           </Form>
         </div>
