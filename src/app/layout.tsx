@@ -21,6 +21,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
+        <script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha"
+          async
+          defer
+        ></script>
       </head>
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider

@@ -8,7 +8,18 @@ export type FormState = {
   fields?: Record<string, string>
   issues?: string[]
 }
+const validateHuman = async (token: string): Promise<boolean> => {
+  const secret = process.env.RECAPTCHA_SECRET_KEY
+  const response = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`,
+    {
+      method: 'POST',
+    },
+  )
+  const data = await response.json()
 
+  return data.success
+}
 export async function onSubmitAction(
   _prevState: FormState,
   data: FormData,
@@ -28,6 +39,8 @@ export async function onSubmitAction(
       issues: parsed.error.issues.map((issue) => issue.message),
     }
   }
+
+  // const token
 
   try {
     const { data, error } = await resend.emails.send({
