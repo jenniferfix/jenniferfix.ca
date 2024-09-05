@@ -17,8 +17,6 @@ export async function onSubmitAction(
   const parsed = formSchema.safeParse(formData)
   const resend = new Resend(process.env.RESEND_API_KEY)
 
-  console.log(parsed)
-
   if (!parsed.success) {
     const fields: Record<string, string> = {}
     for (const key of Object.keys(formData)) {

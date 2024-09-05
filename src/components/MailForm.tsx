@@ -5,6 +5,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/hooks/use-toast'
+
 import {
   Form,
   FormControl,
@@ -42,12 +44,22 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
+  const { toast } = useToast()
 
-  if (state?.message === 'Sent') {
-    // setDialogOpen(false)
-    formRef.current?.reset()
-    console.log('Sent is back')
+  const reset = () => {
+    setDialogOpen(false)
+    form.reset()
+    toast({
+      description: 'Message sent!',
+    })
   }
+
+  React.useEffect(() => {
+    if (state?.message === 'Sent') {
+      reset()
+    }
+  }, [state])
+
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
