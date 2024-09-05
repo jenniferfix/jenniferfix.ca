@@ -65,7 +65,7 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Email Jennfer</DialogTitle>
+          <DialogTitle>Email Jennifer</DialogTitle>
           <DialogDescription>Send me an email</DialogDescription>
         </DialogHeader>
 
