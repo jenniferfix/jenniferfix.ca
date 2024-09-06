@@ -149,6 +149,10 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                   Submit
                 </Button>
               </div>
+              <div
+                className="cf-turnstile"
+                data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              ></div>
             </form>
           </Form>
         </div>
