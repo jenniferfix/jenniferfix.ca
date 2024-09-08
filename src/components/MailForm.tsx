@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
-import PrideButton from '@/components/ui/pridebutton'
 import {
   Form,
   FormControl,
@@ -48,26 +47,22 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
   const formRef = React.useRef<HTMLFormElement>(null)
   const { toast } = useToast()
 
-  const reset = () => {
+  const reset = React.useCallback(() => {
     setDialogOpen(false)
     form.reset()
     toast({
       description: 'Message sent!',
     })
-  }
+  }, [form, toast])
 
   React.useEffect(() => {
     if (state?.message === 'Sent') {
       reset()
     }
-  }, [state])
+  }, [state, reset])
 
   return (
     <React.Fragment>
-      {/* <Script */}
-      {/*   src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha&render=explicit" */}
-      {/*   defer */}
-      {/* /> */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
