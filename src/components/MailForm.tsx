@@ -1,12 +1,14 @@
 'use client'
 import React from 'react'
 import { useFormState } from 'react-dom'
+import Script from 'next/script'
+import Turnstile from 'react-turnstile'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
-
+import PrideButton from '@/components/ui/pridebutton'
 import {
   Form,
   FormControl,
@@ -61,103 +63,111 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
   }, [state])
 
   return (
-    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Email Jennifer</DialogTitle>
-          <DialogDescription>Send me an email</DialogDescription>
-        </DialogHeader>
+    <React.Fragment>
+      {/* <Script */}
+      {/*   src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha&render=explicit" */}
+      {/*   defer */}
+      {/* /> */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogTrigger asChild>{children}</DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Email Jennifer</DialogTitle>
+            <DialogDescription>Send me an email</DialogDescription>
+          </DialogHeader>
 
-        <div>
-          <Form {...form}>
-            {state?.message !== '' && !state.issues && (
-              <div className="">{state.message}</div>
-            )}
-            {state?.issues && (
-              <div className="">
-                <ul>
-                  {state.issues.map((issue) => (
-                    <li key={issue} className="">
-                      {issue}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <form
-              ref={formRef}
-              action={formAction}
-              // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-              className=""
-            >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Name" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="your@email.here" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subject</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Subject" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="How can I help you?" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <div className="flex justify-end gap-2 mt-2">
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">
-                    Cancel
+          <div>
+            <Form {...form}>
+              {state?.message !== '' && !state.issues && (
+                <div className="">{state.message}</div>
+              )}
+              {state?.issues && (
+                <div className="">
+                  <ul>
+                    {state.issues.map((issue) => (
+                      <li key={issue} className="">
+                        {issue}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <form
+                ref={formRef}
+                action={formAction}
+                // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+                className=""
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Name" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="your@email.here" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Subject</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Subject" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="How can I help you?"
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <div className="flex justify-end gap-2 mt-2">
+                  <DialogClose asChild>
+                    <Button type="button" variant="secondary">
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                  <Button type="submit" variant="default">
+                    Submit
                   </Button>
-                </DialogClose>
-                <Button type="submit" variant="default">
-                  Submit
-                </Button>
-              </div>
-              <div
-                className="cf-turnstile"
-                data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-              ></div>
-            </form>
-          </Form>
-        </div>
-      </DialogContent>
-    </Dialog>
+                </div>
+                <Turnstile
+                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                />
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </React.Fragment>
   )
 }
 

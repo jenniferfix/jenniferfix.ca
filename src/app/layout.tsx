@@ -22,10 +22,10 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha"
-          async
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
           defer
-        ></script>
+          async
+        />
       </head>
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider
