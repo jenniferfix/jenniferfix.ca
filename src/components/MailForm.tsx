@@ -144,6 +144,11 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                     </FormItem>
                   )}
                 />
+                <div className="flex justify-center items-center">
+                  <Turnstile
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                  />
+                </div>
                 <div className="flex justify-end gap-2 mt-2">
                   <DialogClose asChild>
                     <Button type="button" variant="secondary">
@@ -154,9 +159,6 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                     Submit
                   </Button>
                 </div>
-                <Turnstile
-                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                />
               </form>
             </Form>
           </div>
