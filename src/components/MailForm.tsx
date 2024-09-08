@@ -73,9 +73,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
 
           <div>
             <Form {...form}>
-              {state?.message !== '' && !state.issues && (
-                <div className="">{state.message}</div>
-              )}
+              {state?.message !== '' &&
+                state?.message !== 'Sent' &&
+                !state.issues && <div className="">{state.message}</div>}
               {state?.issues && (
                 <div className="">
                   <ul>

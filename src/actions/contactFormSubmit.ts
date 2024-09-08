@@ -44,7 +44,6 @@ export async function onSubmitAction(
     }
   }
 
-  console.log(data)
   // lets verify the cloudflare token
   const token = data.get('cf-turnstile-response')
   if (!token) return { message: 'Invalid token' }
