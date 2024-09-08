@@ -9,10 +9,14 @@ export type FormState = {
   issues?: string[]
 }
 const validateHuman = async (token: string): Promise<boolean> => {
-  const secret = process.env.RECAPTCHA_SECRET_KEY
+  const secret = process.env.TURNSTILE_SECRET_KEY!
+  const sendData = new FormData()
+  sendData.append('secret', secret)
+  sendData.append('response', token)
   const response = await fetch(
-    `https://challenges.cloudflare.com/turnstile/v0/siteverify?secret=${secret}&response=${token}`,
+    `https://challenges.cloudflare.com/turnstile/v0/siteverify`,
     {
+      body: sendData,
       method: 'POST',
     },
   )
@@ -40,6 +44,7 @@ export async function onSubmitAction(
     }
   }
 
+  console.log(data)
   // lets verify the cloudflare token
   const token = data.get('cf-turnstile-response')
   if (!token) return { message: 'Invalid token' }
