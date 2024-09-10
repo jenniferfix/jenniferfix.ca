@@ -50,6 +50,9 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --rainbow-text: 135deg, red 0%, red 13.67%, orange 19.67%, orange 30.33%,
+      #cccc00 36.33%, #cccc00 47%, green 53%, green 63.67%, blue 69.67%,
+      blue 79.33%, violet 87.33%, violet 100%;
   }
   .dark {
     --background: 270 100% 9%;
@@ -76,6 +79,9 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --rainbow-text: 135deg, red 0%, red 13.67%, orange 19.67%, orange 30.33%,
+      yellow 36.33%, yellow 47%, green 53%, green 63.67%, blue 69.67%,
+      blue 79.33%, violet 87.33%, violet 100%;
   }
 }
 
@@ -96,22 +102,8 @@
 }
 
 .rainbowtext {
-  background-image: linear-gradient(
-    135deg,
-    red 0%,
-    red 13.67%,
-    orange 19.67%,
-    orange 30.33%,
-    yellow 36.33%,
-    yellow 47%,
-    green 53%,
-    green 63.67%,
-    blue 69.67%,
-    blue 79.33%,
-    violet 87.33%,
-    violet 100%
-  );
-  background-clip: text;
+  background-image: linear-gradient(var(--rainbow-text));
   color: transparent;
+  background-clip: text;
   font-weight: bold;
 }
