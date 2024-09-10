@@ -7,18 +7,18 @@ import MailForm from '@/components/MailForm'
 const Socials = () => {
   return (
     <div className="flex gap-2 min-w-full">
-      <Button size="icon" variant="ghost" asChild>
+      <Button size="icon" variant="ghost" aria-label="Github" asChild>
         <a href="https://github.com/JenniferFix" target="_blank">
           <FaGithub className="text-2xl" />
         </a>
       </Button>
-      <Button size="icon" variant="ghost" asChild>
+      <Button size="icon" variant="ghost" aria-label="LinkedIn" asChild>
         <a href="https://ca.linkedin.com/in/jennifer-fix/" target="_blank">
           <FaLinkedin className="text-2xl" />
         </a>
       </Button>
       <MailForm>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" aria-label="Email">
           <MdAlternateEmail className="text-2xl" />
         </Button>
       </MailForm>
