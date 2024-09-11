@@ -4,12 +4,21 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
+import dynamic from 'next/dynamic'
+import PostHogProvider from '@/components/posthog/PostHogProvider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Jennifer Fix',
   description: 'Internet home of Jennifer Fix',
 }
+const PostHogPageView = dynamic(
+  () => import('@/components/posthog/PostHogPageView'),
+  {
+    ssr: false,
+  },
+)
 
 export default function RootLayout({
   children,
@@ -28,17 +37,22 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-screen`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <FloatingTheme />
-          {/* <Header /> */}
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <FloatingTheme />
+            {/* <Header /> */}
+            <main>
+              <PostHogPageView />
+              {children}
+              <Toaster />
+            </main>
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   )
