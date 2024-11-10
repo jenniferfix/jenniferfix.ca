@@ -1,24 +1,17 @@
+import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
-import dynamic from 'next/dynamic'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
-
+import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Jennifer Fix',
   description: 'Internet home of Jennifer Fix',
 }
-const PostHogPageView = dynamic(
-  () => import('@/components/posthog/PostHogPageView'),
-  {
-    ssr: false,
-  },
-)
 
 export default function RootLayout({
   children,
@@ -47,7 +40,7 @@ export default function RootLayout({
             <FloatingTheme />
             {/* <Header /> */}
             <main>
-              <PostHogPageView />
+              <PostHogPageViewWrapper />
               {children}
               <Toaster />
             </main>

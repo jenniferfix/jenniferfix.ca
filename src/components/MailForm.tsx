@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import Script from 'next/script'
 import Turnstile from 'react-turnstile'
 import { z } from 'zod'
@@ -11,11 +11,9 @@ import { useToast } from '@/hooks/use-toast'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
@@ -33,7 +31,7 @@ import { onSubmitAction } from '@/actions/contactFormSubmit'
 
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
-  const [state, formAction] = useFormState(onSubmitAction, { message: '' })
+  const [state, formAction] = useActionState(onSubmitAction, { message: '' })
   const form = useForm<z.output<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
