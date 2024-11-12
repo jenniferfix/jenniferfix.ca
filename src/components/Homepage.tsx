@@ -32,8 +32,8 @@ const Typer = ({ text, delay }: { text: string; delay: number }) => {
 
 const Homepage = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <main>
+    <div className="flex justify-center items-center min-h-screen w-full">
+      <div className="">
         <div className="text-2xl fira-code-normal">
           <Typer text="Hello, World" delay={200} />
         </div>
@@ -41,7 +41,7 @@ const Homepage = () => {
           I&#39;m <span className="rainbowtext">Jennifer Fix</span>
         </div>
         <Socials />
-      </main>
+      </div>
     </div>
   )
 }

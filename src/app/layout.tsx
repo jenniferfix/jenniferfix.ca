@@ -6,6 +6,7 @@ import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
 import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
+import Menu from '@/components/Menu'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
           async
         />
       </head>
-      <body className={`${inter.className} min-h-screen`}>
+      <body className={`${inter.className} min-h-screen h-full`}>
         <PostHogProvider>
           <ThemeProvider
             attribute="class"
@@ -38,12 +39,12 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <FloatingTheme />
-            {/* <Header /> */}
-            <main>
+            <div className="flex h-full">
+              <Menu />
               <PostHogPageViewWrapper />
               {children}
               <Toaster />
-            </main>
+            </div>
           </ThemeProvider>
         </PostHogProvider>
       </body>
