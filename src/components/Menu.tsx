@@ -33,20 +33,20 @@ const Menu = () => {
   return (
     <React.Fragment>
       <nav className="hidden lg:block h-full">
-        <ul className="flex flex-col justify-center h-full gap-8 pl-12 text-right">
+        <ul className="flex flex-col justify-center h-full gap-8 pl-12 text-right min-h-screen">
           {menuItems.map((item) => (
             <li
               key={item.url}
               className={cn(
-                'transition ease-in-out delay-150 opacity-70',
-                'hover:opacity-95 hover:scale-110 hover:-translate-y-1 hover:translate-x-1 duration-300',
+                'text-mauve transition ease-in-out delay-150 opacity-70',
+                'hover:text-pink hover:opacity-95 hover:scale-110 hover:-translate-y-1 hover:translate-x-1 duration-300',
                 'motion-reduce:transition-none motion-reduce:hover:transform-none',
               )}
             >
               <Link
                 href={item.url}
                 className={cn(
-                  'text-4xl',
+                  'text-4xl whitespace-nowrap',
                   path === item.url ? 'opacity-25' : '',
                 )}
               >
@@ -59,9 +59,9 @@ const Menu = () => {
       <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
         <SheetTrigger asChild>
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="lg:hidden absolute top-8 left-8"
+            className="lg:hidden absolute top-1 left-1"
           >
             <HamburgerMenuIcon />
           </Button>
@@ -71,14 +71,14 @@ const Menu = () => {
             <SheetTitle hidden>Mobile Menu</SheetTitle>
           </SheetHeader>
           <nav className="h-full opacity-100">
-            <ul className="flex flex-col gap-2 justify-start h-full">
-              <li className="text-4xl py-4 pl-4 bg-gradient-to-r from-background/90 to-background/0">
+            <ul className="flex flex-col gap-1 justify-start h-full">
+              <li className="text-4xl py-4 pl-4 bg-gradient-to-r from-base/95 to-base/5">
                 &nbsp;
               </li>
               {menuItems.map((item) => (
                 <li
                   key={'mobile' + item.url}
-                  className="py-4 pl-4 bg-gradient-to-r from-background/90 to-background/20"
+                  className="py-4 pl-4 bg-gradient-to-r from-base/95 to-base/5"
                 >
                   <Link
                     href={item.url}
