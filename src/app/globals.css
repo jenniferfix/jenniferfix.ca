@@ -50,9 +50,6 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --rainbow-text: 135deg, #cc0000 0%, #cc0000 13.67%, #eea500 19.67%,
-      #eea500 30.33%, #dddd00 36.33%, #dddd00 47%, green 53%, green 63.67%,
-      blue 69.67%, blue 79.33%, violet 87.33%, violet 100%;
     --menu-fade: 90deg, rgba(255, 0, 0, 0.9), rgba(255, 0, 0, 0.25);
     --glow: 270 100% 85%;
   }
@@ -81,10 +78,19 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --rainbow-text: 135deg, red 0%, red 13.67%, orange 19.67%, orange 30.33%,
-      yellow 36.33%, yellow 47%, green 53%, green 63.67%, blue 69.67%,
-      blue 79.33%, violet 87.33%, violet 100%;
     --menu-fade: 90deg, rgba(255, 0, 0, 0.9), rgba(255, 0, 0, 0.25);
+    --glow: 270 100% 20%;
+  }
+  .latte {
+    --glow: 270 100% 85%;
+  }
+  .frappe {
+    --glow: 270 100% 20%;
+  }
+  .macchiato {
+    --glow: 270 100% 20%;
+  }
+  .mocha {
     --glow: 270 100% 20%;
   }
 }
@@ -94,14 +100,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-surface0 text-text;
     min-height: 100vh;
-    background-color: hsl(var(--background));
-    background: radial-gradient(
-      ellipse,
-      hsl(var(--glow)) 10%,
-      hsl(var(--background)) 90%
-    );
+    /*background-color: hsl(var(--background));*/
+    /*background: radial-gradient(*/
+    /*  ellipse,*/
+    /*  hsl(var(--glow)) 10%,*/
+    /*  hsl(var(--background)) 90%*/
+    /*);*/
   }
 }
 
@@ -112,15 +118,41 @@
   font-style: normal;
 }
 
+.glow {
+  background-image: radial-gradient(
+    ellipse,
+    hsl(var(--glow)) 10%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
 .rainbowtext {
-  background-image: linear-gradient(var(--rainbow-text));
+  /*background-image: linear-gradient(var(--rainbow-text));*/
+  background-image: linear-gradient(
+    135deg,
+    rgb(var(--ctp-red)) 0%,
+    rgb(var(--ctp-red)) 14%,
+    rgb(var(--ctp-peach)) 20%,
+    rgb(var(--ctp-peach)) 30%,
+    rgb(var(--ctp-yellow)) 35%,
+    rgb(var(--ctp-yellow)) 45%,
+    rgb(var(--ctp-green)) 53%,
+    rgb(var(--ctp-green)) 63%,
+    rgb(var(--ctp-blue)) 70%,
+    rgb(var(--ctp-blue)) 80%,
+    rgb(var(--ctp-mauve)) 87%,
+    rgb(var(--ctp-mauve)) 100%
+  );
   color: transparent;
   background-clip: text;
-  font-weight: bold;
 }
 
 .menufade {
-  background-image: linear-gradient(var(--menu-fade));
+  background-image: linear-gradient(
+    90deg,
+    rgba(var(--ctp-blue), 1),
+    rgba(var(--ctp-base), 1)
+  );
   color: transparent;
   background-clip: text;
 }

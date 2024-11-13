@@ -30,19 +30,24 @@ export default function RootLayout({
           async
         />
       </head>
-      <body className={`${inter.className} min-h-screen h-full`}>
+      <body className={`${inter.className} h-full`}>
         <PostHogProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="latte"
             enableSystem
-            disableTransitionOnChange
+            themes={['latte', 'frappe', 'macchiato', 'mocha']}
+            // disableTransitionOnChange
           >
             <FloatingTheme />
-            <div className="flex h-full">
+            <div className="absolute inset-0 glow -z-50"></div>
+            <div className="flex h-full w-full grow">
               <Menu />
               <PostHogPageViewWrapper />
-              {children}
+              <div className="grow">
+                <div className="h-12">&nbsp;</div>
+                {children}
+              </div>
               <Toaster />
             </div>
           </ThemeProvider>
