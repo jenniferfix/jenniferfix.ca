@@ -10,45 +10,45 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'rgb(var(--ctp-overlay0))',
+        background: 'rgb(var(--ctp-base))',
         foreground: 'rgb(var(--ctp-text))',
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'rgb(var(--ctp-mantle))',
+          foreground: 'rgb(var(--ctp-text))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'rgb(var(--surface1))',
+          foreground: 'rgb(var(--text))',
         },
         primary: {
-          DEFAULT: 'rgb(var(--ctp-green))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'rgb(var(--ctp-blue))',
+          foreground: 'rgb(var(--ctp-crust))',
         },
         secondary: {
-          DEFAULT: 'rgb(var(--ctp-teal))',
-          foreground: 'rgb(var(--ctp-subtext1))',
+          DEFAULT: 'rgb(var(--ctp-surface2))',
+          foreground: 'rgb(var(--ctp-text))',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'rgb(var(--ctp-surface0))',
+          foreground: 'rgb(var(--ctp-subtext1))',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: 'rgb(var(--ctp-peach))',
+          foreground: 'rgb(var(--ctp-crust))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'rgb(var(--ctp-red))',
+          foreground: 'rgb(var(--ctp-text))',
         },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
+        border: 'rgb(var(--ctp-overlay1))',
+        input: 'rgb(var(--ctp-overlay2))',
+        ring: 'rgb(var(--ctp-overlay0))',
         chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
+          '1': 'rgb(var(--ctp-blue))',
+          '2': 'rgb(var(--ctp-green))',
+          '3': 'rgb(var(--ctp-peach))',
+          '4': 'rgb(var(--ctp-mauve))',
+          '5': 'rgb(var(--ctp-red))',
         },
       },
       borderRadius: {
