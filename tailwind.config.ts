@@ -29,7 +29,7 @@ export default {
           foreground: 'rgb(var(--ctp-text))',
         },
         muted: {
-          DEFAULT: 'rgb(var(--ctp-surface0))',
+          DEFAULT: 'rgb(var(--ctp-surface1))',
           foreground: 'rgb(var(--ctp-subtext1))',
         },
         accent: {
