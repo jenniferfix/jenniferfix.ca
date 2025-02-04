@@ -8,8 +8,8 @@ const Socials = () => {
   return (
     <div className="flex gap-2 min-w-full">
       <Button size="icon" variant="ghost" aria-label="Github" asChild>
-        <a href="https://github.com/JenniferFix" target="_blank">
-          <FaGithub className="text-2xl text-red" />
+        <a href="https://github.com/jenniferfix" target="_blank">
+          <FaGithub className="text-2xl" />
         </a>
       </Button>
       <Button size="icon" variant="ghost" aria-label="LinkedIn" asChild>
