@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 :root {
@@ -50,9 +48,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --rainbow-text: 135deg, #cc0000 0%, #cc0000 13.67%, #eea500 19.67%,
-      #eea500 30.33%, #dddd00 36.33%, #dddd00 47%, green 53%, green 63.67%,
-      blue 69.67%, blue 79.33%, violet 87.33%, violet 100%;
+    --rainbow-text:
+      135deg, #cc0000 0%, #cc0000 13.67%, #eea500 19.67%, #eea500 30.33%,
+      #dddd00 36.33%, #dddd00 47%, green 53%, green 63.67%, blue 69.67%,
+      blue 79.33%, violet 87.33%, violet 100%;
     --glow: 270 100% 85%;
   }
   .dark {
@@ -80,19 +79,20 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --rainbow-text: 135deg, red 0%, red 13.67%, orange 19.67%, orange 30.33%,
-      yellow 36.33%, yellow 47%, green 53%, green 63.67%, blue 69.67%,
-      blue 79.33%, violet 87.33%, violet 100%;
+    --rainbow-text:
+      135deg, red 0%, red 13.67%, orange 19.67%, orange 30.33%, yellow 36.33%,
+      yellow 47%, green 53%, green 63.67%, blue 69.67%, blue 79.33%,
+      violet 87.33%, violet 100%;
     --glow: 270 100% 20%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    /*@apply border-border;*/
   }
   body {
-    @apply bg-background text-foreground;
+    /*@apply bg-background text-foreground;*/
     min-height: 100vh;
     background-color: hsl(var(--background));
     background: radial-gradient(
