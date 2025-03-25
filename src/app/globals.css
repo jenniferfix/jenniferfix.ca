@@ -143,11 +143,11 @@
   body {
     @apply text-foreground;
     min-height: 100vh;
-    background-color: hsl(var(--background));
+    background-color: var(--background);
     background: radial-gradient(
       ellipse,
       hsl(var(--glow)) 10%,
-      hsl(var(--background)) 90%
+      var(--background) 90%
     );
   }
 }
