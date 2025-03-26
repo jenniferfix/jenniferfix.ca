@@ -47,7 +47,7 @@ const Menu = () => {
                 href={item.url}
                 className={cn(
                   'text-4xl whitespace-nowrap',
-                  path === item.url ? 'opacity-25' : '',
+                  path === item.url ? 'hidden' : '',
                 )}
               >
                 {item.title}

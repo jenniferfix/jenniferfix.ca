@@ -168,25 +168,26 @@
 }
 
 .rainbowtext {
-  background-image: linear-gradient(
-    135deg,
-    rgb(var(--ctp-red)) 0%,
-    rgb(var(--ctp-red)) 12%,
-    rgb(var(--ctp-peach)) 17%,
-    rgb(var(--ctp-peach)) 28%,
-    rgb(var(--ctp-yellow)) 33%,
-    rgb(var(--ctp-yellow)) 45%,
-    rgb(var(--ctp-green)) 50%,
-    rgb(var(--ctp-green)) 61%,
-    rgb(var(--ctp-blue)) 66%,
-    rgb(var(--ctp-blue)) 78%,
-    rgb(var(--ctp-mauve)) 83%,
-    rgb(var(--ctp-mauve)) 90%
-  );
+  /*background-image: linear-gradient(*/
+  /*  135deg,*/
+  /*  rgb(var(--ctp-red)) 0%,*/
+  /*  rgb(var(--ctp-red)) 12%,*/
+  /*  rgb(var(--ctp-peach)) 17%,*/
+  /*  rgb(var(--ctp-peach)) 28%,*/
+  /*  rgb(var(--ctp-yellow)) 33%,*/
+  /*  rgb(var(--ctp-yellow)) 45%,*/
+  /*  rgb(var(--ctp-green)) 50%,*/
+  /*  rgb(var(--ctp-green)) 61%,*/
+  /*  rgb(var(--ctp-blue)) 66%,*/
+  /*  rgb(var(--ctp-blue)) 78%,*/
+  /*  rgb(var(--ctp-mauve)) 83%,*/
+  /*  rgb(var(--ctp-mauve)) 90%*/
+  /*);*/
+  background-image: linear-gradient(var(--rainbow-text));
   color: transparent;
   background-clip: text;
-  background-size: 500% 500%;
-  animation: rainbow-move 180s linear infinite;
+  /*background-size: 500% 500%;*/
+  /*animation: rainbow-move 180s linear infinite;*/
 }
 
 @keyframes rainbow-move {
