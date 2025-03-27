@@ -1,19 +1,64 @@
 import React from 'react'
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardHeader,
+  CardDescription,
+} from '@/components/ui/card'
 
+type Project = {
+  name: string
+  description: string
+  github?: string
+  demo?: string
+  screenshot?: string
+}
+const projects: Project[] = [
+  {
+    name: 'Emoji Invaders',
+    description: '',
+    github: '',
+    demo: '',
+    screenshot: '',
+  },
+  {
+    name: 'Calgary Non-Binary and Transgender Society',
+    description: '',
+    github: '',
+    demo: '',
+    screenshot: '',
+  },
+  {
+    name: 'Conveyor Jam/Fault Display',
+    description: '',
+    github: '',
+    demo: '',
+    screenshot: '',
+  },
+  {
+    name: 'The Feud',
+    description: '',
+    github: '',
+    demo: '',
+    screenshot: '',
+  },
+]
 const Work = () => {
   return (
     <div>
-      <h2>Things I've done</h2>
-      <div>
-        <article>
-          <h3>Calgary Non-Binary and Transgender Society</h3>
-        </article>
-        <article>
-          <h3>The Feud</h3>
-        </article>
-        <article>
-          <h3>Live Equipment Status Display</h3>
-        </article>
+      <h2>Projects I&apos;ve done</h2>
+      <div style={{ display: 'grid' }}>
+        {projects.map((p) => (
+          <Card typeof="article" key={p.name}>
+            <CardHeader>
+              <CardTitle>{p.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>{p.description}</p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   )
