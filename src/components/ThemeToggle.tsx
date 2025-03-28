@@ -25,21 +25,30 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('latte')}>
-          Latte
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+          Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('frappe')}>
-          Frappe
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('macchiato')}>
-          Macchiato
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('mocha')}>
-          Mocha
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+          Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
           System
         </DropdownMenuItem>
+        {/* <DropdownMenuItem onClick={() => setTheme('latte')}> */}
+        {/*   Latte */}
+        {/* </DropdownMenuItem> */}
+        {/* <DropdownMenuItem onClick={() => setTheme('frappe')}> */}
+        {/*   Frappe */}
+        {/* </DropdownMenuItem> */}
+        {/* <DropdownMenuItem onClick={() => setTheme('macchiato')}> */}
+        {/*   Macchiato */}
+        {/* </DropdownMenuItem> */}
+        {/* <DropdownMenuItem onClick={() => setTheme('mocha')}> */}
+        {/*   Mocha */}
+        {/* </DropdownMenuItem> */}
+        {/* <DropdownMenuItem onClick={() => setTheme('system')}> */}
+        {/*   System */}
+        {/* </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   )

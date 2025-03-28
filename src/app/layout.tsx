@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
 import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
 import Menu from '@/components/Menu'
@@ -34,22 +35,24 @@ export default function RootLayout({
         <PostHogProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="latte"
+            defaultTheme="dark"
             enableSystem
-            themes={['latte', 'frappe', 'macchiato', 'mocha']}
+            themes={['light', 'dark']}
             // disableTransitionOnChange
           >
-            <FloatingTheme />
-            <div className="absolute inset-0 glow -z-50"></div>
-            <div className="flex h-full w-full grow">
-              <Menu />
-              <PostHogPageViewWrapper />
-              <div className="grow">
-                <div className="h-12">&nbsp;</div>
-                {children}
+            <TooltipProvider>
+              <FloatingTheme />
+              <div className="absolute inset-0 glow -z-50"></div>
+              <div className="flex h-full w-full grow">
+                <Menu />
+                <PostHogPageViewWrapper />
+                <div className="grow">
+                  <div className="h-12">&nbsp;</div>
+                  {children}
+                </div>
+                <Toaster />
               </div>
-              <Toaster />
-            </div>
+            </TooltipProvider>
           </ThemeProvider>
         </PostHogProvider>
       </body>

@@ -13,17 +13,24 @@ import {
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { FaHouseChimney, FaCode, FaUser, FaIdCard } from 'react-icons/fa6'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 type MenuItem = {
   url: string
   title: string
+  icon: React.ReactNode
 }
 
 const menuItems: MenuItem[] = [
-  { url: '/', title: 'Home' },
-  { url: '/bio', title: 'Bio' },
-  { url: '/resume', title: 'Resume' },
-  { url: '/work', title: 'My Work' },
+  { icon: <FaHouseChimney />, url: '/', title: 'Home' },
+  { icon: <FaUser />, url: '/bio', title: 'Bio' },
+  { icon: <FaIdCard />, url: '/resume', title: 'Resume' },
+  { icon: <FaCode />, url: '/portfolio', title: 'Portfolio' },
 ]
 
 const Menu = () => {
@@ -43,15 +50,25 @@ const Menu = () => {
                 'motion-reduce:transition-none motion-reduce:hover:transform-none',
               )}
             >
-              <Link
-                href={item.url}
-                className={cn(
-                  'text-4xl whitespace-nowrap',
-                  path === item.url ? 'hidden' : '',
-                )}
-              >
-                {item.title}
-              </Link>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={item.url}
+                    className={cn(
+                      'text-4xl whitespace-nowrap',
+                      path === item.url ? 'opacity-20' : '',
+                    )}
+                  >
+                    {item.icon}
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="left"
+                  className="p-3 bg-popover text-popover-foreground border rounded-2xl"
+                >
+                  <p className="font-bold text-3xl">{item.title}</p>
+                </TooltipContent>
+              </Tooltip>
             </li>
           ))}
         </ul>

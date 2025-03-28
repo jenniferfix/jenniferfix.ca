@@ -44,7 +44,7 @@ const projects: Project[] = [
     screenshot: '',
   },
 ]
-const Work = () => {
+const Portfolio = () => {
   return (
     <div>
       <h2>Projects I&apos;ve done</h2>
@@ -64,4 +64,4 @@ const Work = () => {
   )
 }
 
-export default Work
+export default Portfolio

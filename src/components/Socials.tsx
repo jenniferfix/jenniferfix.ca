@@ -14,12 +14,12 @@ const Socials = () => {
       </Button>
       <Button size="icon" variant="ghost" aria-label="LinkedIn" asChild>
         <a href="https://ca.linkedin.com/in/jennifer-fix/" target="_blank">
-          <FaLinkedin className="text-2xl text-peach" />
+          <FaLinkedin className="text-2xl" />
         </a>
       </Button>
       <MailForm>
         <Button size="icon" variant="ghost" aria-label="Email">
-          <MdAlternateEmail className="text-2xl text-yellow" />
+          <MdAlternateEmail className="text-2xl" />
         </Button>
       </MailForm>
     </div>
