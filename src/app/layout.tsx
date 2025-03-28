@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { TooltipProvider as MenuTitleTipProvider } from '@/components/ui/menutitle'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
 import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
 import Menu from '@/components/Menu'
@@ -38,7 +39,7 @@ export default function RootLayout({
             defaultTheme="dark"
             enableSystem
             themes={['light', 'dark']}
-            // disableTransitionOnChange
+          // disableTransitionOnChange
           >
             <TooltipProvider>
               <FloatingTheme />
