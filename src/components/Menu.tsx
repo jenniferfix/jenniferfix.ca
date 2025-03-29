@@ -18,7 +18,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  TooltipProvider
+  TooltipProvider,
 } from '@/components/ui/tooltip'
 
 type MenuItem = {
@@ -65,6 +65,7 @@ const Menu = () => {
                     </Link>
                   </TooltipTrigger>
                   <TooltipContent
+                    tiptype="menu"
                     side="left"
                     className="p-3 bg-popover text-popover-foreground border rounded-2xl"
                   >
