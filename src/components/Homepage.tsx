@@ -32,7 +32,10 @@ const Typer = ({ text, delay }: { text: string; delay: number }) => {
 
 const Homepage = () => {
   return (
-    <div className="flex justify-center items-center h-full w-full">
+    <section
+      id="hero"
+      className="flex justify-center items-center min-h-screen snap-start"
+    >
       <div className="">
         <div className="text-2xl fira-code-normal">
           <Typer text="Hello, World" delay={200} />
@@ -43,7 +46,7 @@ const Homepage = () => {
         </div>
         <Socials />
       </div>
-    </div>
+    </section>
   )
 }
 

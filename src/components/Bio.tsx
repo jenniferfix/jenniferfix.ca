@@ -2,7 +2,7 @@ import React from 'react'
 
 const Bio = () => {
   return (
-    <div className="">
+    <section className="min-h-screen snap-start">
       <h2 className="text-3xl border-b border-b-pink">Bio</h2>
       <h3 className="inline pr-2 text-2xl">Jennifer Fix</h3>
       <span>She/Her</span>
@@ -16,7 +16,7 @@ const Bio = () => {
           <li>Fixing</li>
         </ul>
       </article>
-    </div>
+    </section>
   )
 }
 

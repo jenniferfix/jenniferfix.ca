@@ -13,17 +13,25 @@ import {
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { FaHouseChimney, FaCode, FaUser, FaIdCard } from 'react-icons/fa6'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from '@/components/ui/tooltip'
 
 type MenuItem = {
   url: string
   title: string
+  icon: React.ReactNode
 }
 
 const menuItems: MenuItem[] = [
-  { url: '/', title: 'Home' },
-  { url: '/bio', title: 'Bio' },
-  { url: '/resume', title: 'Resume' },
-  { url: '/work', title: 'My Work' },
+  { icon: <FaHouseChimney />, url: '/', title: 'Home' },
+  { icon: <FaUser />, url: '/bio', title: 'Bio' },
+  { icon: <FaIdCard />, url: '/resume', title: 'Resume' },
+  { icon: <FaCode />, url: '/portfolio', title: 'Portfolio' },
 ]
 
 const Menu = () => {
@@ -33,28 +41,41 @@ const Menu = () => {
   return (
     <React.Fragment>
       <nav className="hidden lg:block h-full">
-        <ul className="flex flex-col justify-center h-full gap-8 pl-12 text-right min-h-screen">
-          {menuItems.map((item) => (
-            <li
-              key={item.url}
-              className={cn(
-                'text-mauve transition ease-in-out delay-150 opacity-70',
-                'hover:text-pink hover:opacity-95 hover:scale-110 hover:-translate-y-1 hover:translate-x-1 duration-300',
-                'motion-reduce:transition-none motion-reduce:hover:transform-none',
-              )}
-            >
-              <Link
-                href={item.url}
+        <TooltipProvider delayDuration={100}>
+          <ul className="flex flex-col justify-center h-full gap-8 pl-12 text-right min-h-screen">
+            {menuItems.map((item) => (
+              <li
+                key={item.url}
                 className={cn(
-                  'text-4xl whitespace-nowrap',
-                  path === item.url ? 'hidden' : '',
+                  'text-mauve transition ease-in-out delay-150 opacity-70',
+                  'hover:text-pink hover:opacity-95 hover:scale-110 hover:-translate-y-1 hover:translate-x-1 duration-300',
+                  'motion-reduce:transition-none motion-reduce:hover:transform-none',
                 )}
               >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      href={item.url}
+                      className={cn(
+                        'text-4xl whitespace-nowrap',
+                        path === item.url ? 'opacity-20' : '',
+                      )}
+                    >
+                      {item.icon}
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent
+                    tiptype="menu"
+                    side="left"
+                    className="p-3 bg-popover text-popover-foreground border rounded-2xl"
+                  >
+                    <p className="font-bold text-3xl">{item.title}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </li>
+            ))}
+          </ul>
+        </TooltipProvider>
       </nav>
       <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
         <SheetTrigger asChild>

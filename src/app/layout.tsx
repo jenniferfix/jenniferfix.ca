@@ -4,9 +4,11 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import FloatingTheme from '@/components/FloatingTheme'
 import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
 import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
 import Menu from '@/components/Menu'
+import More from '@/components/More'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -30,26 +32,23 @@ export default function RootLayout({
           async
         />
       </head>
-      <body className={`${inter.className} h-full`}>
+      <body className={`${inter.className}`}>
         <PostHogProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="latte"
+            defaultTheme="dark"
             enableSystem
-            themes={['latte', 'frappe', 'macchiato', 'mocha']}
+            themes={['light', 'dark']}
             // disableTransitionOnChange
           >
-            <FloatingTheme />
-            <div className="absolute inset-0 glow -z-50"></div>
-            <div className="flex h-full w-full grow">
-              <Menu />
+            <TooltipProvider>
+              <FloatingTheme />
+              {/* <Menu /> */}
+              {/* <More /> */}
               <PostHogPageViewWrapper />
-              <div className="grow">
-                <div className="h-12">&nbsp;</div>
-                {children}
-              </div>
+              {children}
               <Toaster />
-            </div>
+            </TooltipProvider>
           </ThemeProvider>
         </PostHogProvider>
       </body>
