@@ -30,7 +30,7 @@ const Typer = ({ text, delay }: { text: string; delay: number }) => {
   return <span>{curText + outChar}</span>
 }
 
-const Homepage = () => {
+const Hero = () => {
   return (
     <section
       id="hero"
@@ -50,4 +50,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default Hero

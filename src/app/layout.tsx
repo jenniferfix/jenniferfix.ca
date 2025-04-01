@@ -7,8 +7,6 @@ import { Toaster } from '@/components/ui/toaster'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import PostHogProvider from '@/components/posthog/PostHogProvider'
 import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
-import Menu from '@/components/Menu'
-import More from '@/components/More'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -43,8 +41,6 @@ export default function RootLayout({
           >
             <TooltipProvider>
               <FloatingTheme />
-              {/* <Menu /> */}
-              {/* <More /> */}
               <PostHogPageViewWrapper />
               {children}
               <Toaster />
