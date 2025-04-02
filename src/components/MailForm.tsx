@@ -1,13 +1,12 @@
 'use client'
 import React from 'react'
 import { useActionState } from 'react'
-import Script from 'next/script'
 import Turnstile from 'react-turnstile'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import { useToast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import {
   Form,
   FormControl,
@@ -43,14 +42,11 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
-  const { toast } = useToast()
 
   const reset = React.useCallback(() => {
     setDialogOpen(false)
     form.reset()
-    toast({
-      description: 'Message sent!',
-    })
+    toast('Message sent!')
   }, [form, toast])
 
   React.useEffect(() => {
@@ -144,7 +140,7 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                 />
                 <div className="flex justify-center items-center">
                   <Turnstile
-                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                    sitekey={process.env.VITE_PUBLIC_TURNSTILE_SITE_KEY!}
                   />
                 </div>
                 <div className="flex justify-end gap-2 mt-2">

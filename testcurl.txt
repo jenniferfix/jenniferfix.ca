@@ -1,1 +1,0 @@
-curl -d '{"name":"Jenni","email":"jen@test.jen","subject":"My Sub","message":"test message"}' -H "Content-Type: application/json" -X POST http://locahost:3000/api/send
