@@ -1,4 +1,3 @@
-'use server'
 import { formSchema } from '@/schemas'
 import { EmailTemplate } from '@/components/email-template'
 import { Resend } from 'resend'
@@ -24,7 +23,7 @@ const validateHuman = async (token: string): Promise<boolean> => {
 
   return data.success
 }
-export async function onSubmitAction(
+export async function onSubmitHandler(
   _prevState: FormState,
   data: FormData,
 ): Promise<FormState> {

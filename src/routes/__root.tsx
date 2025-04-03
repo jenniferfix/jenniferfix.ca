@@ -11,6 +11,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
 // import PostHogProvider from '@/components/posthog/PostHogProvider'
 // import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
+import Header from '@/components/Header'
 
 import TanstackQueryLayout from '../integrations/tanstack-query/layout'
 
@@ -46,7 +47,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
   component: () => (
     <RootDocument>
-      {/* <Header /> */}
+      <Header />
 
       <Outlet />
       <TanStackRouterDevtools />

@@ -26,11 +26,12 @@ import {
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { formSchema } from '@/schemas'
-import { onSubmitAction } from '@/actions/contactFormSubmit'
+import { onSubmitHandler } from '@/actions/contactFormSubmit'
+import { createServerFn } from '@tanstack/react-start'
 
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
-  const [state, formAction] = useActionState(onSubmitAction, { message: '' })
+  const [state, formAction] = useActionState(onSubmitHandler, { message: '' })
   const form = useForm<z.output<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
