@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { FaLinkedin, FaGithub } from 'react-icons/fa6'
-// import { MdAlternateEmail } from 'react-icons/md'
-// import MailForm from '@/components/MailForm'
+import { MdAlternateEmail } from 'react-icons/md'
+import MailForm from '@/components/MailForm'
 
 const Socials = () => {
   return (
@@ -17,11 +17,11 @@ const Socials = () => {
           <FaLinkedin className="text-2xl" />
         </a>
       </Button>
-      {/* <MailForm> */}
-      {/*   <Button size="icon" variant="ghost" aria-label="Email"> */}
-      {/*     <MdAlternateEmail className="text-2xl" /> */}
-      {/*   </Button> */}
-      {/* </MailForm> */}
+      <MailForm>
+        <Button size="icon" variant="ghost" aria-label="Email">
+          <MdAlternateEmail className="text-2xl" />
+        </Button>
+      </MailForm>
     </div>
   )
 }

@@ -1,19 +1,8 @@
 'use client'
 import React from 'react'
-import { useActionState } from 'react'
 import Turnstile from 'react-turnstile'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
   Dialog,
@@ -24,22 +13,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { formSchema } from '@/schemas'
 import { onSubmitHandler } from '@/actions/contactFormSubmit'
-import { createServerFn } from '@tanstack/react-start'
+import { useForm } from '@tanstack/react-form'
 
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
-  const [state, formAction] = useActionState(onSubmitHandler, { message: '' })
-  const form = useForm<z.output<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+
+  // const [state, formAction] = useActionState(onSubmitHandler, { message: '' })
+
+  const form = useForm({
     defaultValues: {
       name: '',
       email: '',
       subject: '',
       message: '',
-      ...(state?.fields ?? {}),
+    },
+    onSubmit: ({ value }) => {
+      console.log('submitted', value)
+      onSubmitHandler({ data: value })
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -50,11 +44,11 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
     toast('Message sent!')
   }, [form, toast])
 
-  React.useEffect(() => {
-    if (state?.message === 'Sent') {
-      reset()
-    }
-  }, [state, reset])
+  // React.useEffect(() => {
+  //   if (state?.message === 'Sent') {
+  //     reset()
+  //   }
+  // }, [state, reset])
 
   return (
     <React.Fragment>
@@ -67,95 +61,108 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
           </DialogHeader>
 
           <div>
-            <Form {...form}>
-              {state?.message !== '' &&
-                state?.message !== 'Sent' &&
-                !state.issues && <div className="">{state.message}</div>}
-              {state?.issues && (
-                <div className="">
-                  <ul>
-                    {state.issues.map((issue) => (
-                      <li key={issue} className="">
-                        {issue}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <form
-                ref={formRef}
-                action={formAction}
-                // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-                className=""
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Name" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
+            {/* <Form {...form}> */}
+            {/*   {state?.message !== '' && */}
+            {/*     state?.message !== 'Sent' && */}
+            {/*     !state.issues && <div className="">{state.message}</div>} */}
+            {/*   {state?.issues && ( */}
+            {/*     <div className=""> */}
+            {/*       <ul> */}
+            {/*         {state.issues.map((issue) => ( */}
+            {/*           <li key={issue} className=""> */}
+            {/*             {issue} */}
+            {/*           </li> */}
+            {/*         ))} */}
+            {/*       </ul> */}
+            {/*     </div> */}
+            {/*   )} */}
+            <form
+              ref={formRef}
+              // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+              className=""
+            >
+              <form.Field
+                name="name"
+                children={(field) => (
+                  <div>
+                    <Label htmlFor={field.name}>Name</Label>
+                    <Input
+                      placeholder="Name"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  </div>
+                )}
+              />
+              <form.Field
+                name="email"
+                children={(field) => (
+                  <div>
+                    <Label htmlFor={field.name}>Email</Label>
+                    <Input
+                      placeholder="your@email.here"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  </div>
+                )}
+              />
+              <form.Field
+                name="subject"
+                children={(field) => (
+                  <div>
+                    <Label htmlFor={field.name}>Subject</Label>
+                    <Input
+                      placeholder="Subject"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  </div>
+                )}
+              />
+              <form.Field
+                name="message"
+                children={(field) => (
+                  <div>
+                    <Label htmlFor={field.name}>Message</Label>
+                    <Textarea
+                      placeholder="How can I help you?"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  </div>
+                )}
+              />
+              <div className="flex justify-center items-center">
+                <Turnstile
+                  sitekey={process.env.VITE_PUBLIC_TURNSTILE_SITE_KEY!}
+                  fixedSize={true}
                 />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="your@email.here" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Subject</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Subject" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="How can I help you?"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <div className="flex justify-center items-center">
-                  <Turnstile
-                    sitekey={process.env.VITE_PUBLIC_TURNSTILE_SITE_KEY!}
-                  />
-                </div>
-                <div className="flex justify-end gap-2 mt-2">
-                  <DialogClose asChild>
-                    <Button type="button" variant="secondary">
-                      Cancel
-                    </Button>
-                  </DialogClose>
-                  <Button type="submit" variant="default">
-                    Submit
+              </div>
+              <div className="flex justify-end gap-2 mt-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Cancel
                   </Button>
-                </div>
-              </form>
-            </Form>
+                </DialogClose>
+                <Button type="submit" variant="default">
+                  Submit
+                </Button>
+              </div>
+            </form>
+            {/* </Form> */}
           </div>
         </DialogContent>
       </Dialog>
