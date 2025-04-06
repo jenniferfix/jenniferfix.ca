@@ -33,7 +33,7 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
     },
     onSubmit: ({ value }) => {
       console.log('submitted', value)
-      onSubmitHandler({ data: value })
+      // onSubmitHandler({ data: value })
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -78,7 +78,11 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
             {/*   )} */}
             <form
               ref={formRef}
-              // onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+              onSubmit={(e) => {
+                e.preventDefault()
+                console.log('onsubmit')
+                // form.handleSubmit()
+              }}
               className=""
             >
               <form.Field
@@ -94,6 +98,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
+                    {field.state.meta.errors.length ? (
+                      <em>{field.state.meta.errors.join(',')}</em>
+                    ) : null}
                   </div>
                 )}
               />
@@ -110,6 +117,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
+                    {field.state.meta.errors.length ? (
+                      <em>{field.state.meta.errors.join(',')}</em>
+                    ) : null}
                   </div>
                 )}
               />
@@ -126,6 +136,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
+                    {field.state.meta.errors.length ? (
+                      <em>{field.state.meta.errors.join(',')}</em>
+                    ) : null}
                   </div>
                 )}
               />
@@ -142,6 +155,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
+                    {field.state.meta.errors.length ? (
+                      <em>{field.state.meta.errors.join(',')}</em>
+                    ) : null}
                   </div>
                 )}
               />
