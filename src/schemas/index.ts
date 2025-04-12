@@ -13,5 +13,5 @@ export const formSchema = z.object({
   message: z.string().trim().min(1, {
     message: 'Hi, you rang?',
   }),
-  'cf-turnstile-response': z.string().trim(),
+  'cf-turnstile-response': z.string().trim().optional(),
 })

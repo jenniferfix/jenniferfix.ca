@@ -10,12 +10,12 @@ const More = () => {
   React.useEffect(() => {
     const mainElement = document.getElementById('main') as HTMLElement
 
-    if (!mainElement) {
+    if (!ref.current) {
       return
     }
 
     const handleScroll = () => {
-      const scrollTop = mainElement.scrollTop
+      const scrollTop = ref.current?.scrollTop
       setIsTop(scrollTop === 0)
     }
 

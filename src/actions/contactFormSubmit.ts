@@ -1,39 +1,42 @@
-import { formSchema } from '@/schemas'
-import { EmailTemplate } from '@/components/email-template'
+import { z } from 'zod'
 import { Resend } from 'resend'
 import { createServerFn } from '@tanstack/react-start'
-import { z } from 'zod'
+import { EmailTemplate } from '@/components/email-template'
+import { formSchema } from '@/schemas'
 
-export type FormState = {
-  message: string
-  fields?: Record<string, string>
-  issues?: string[]
-}
-const validateHuman = async (token: string): Promise<boolean> => {
-  const secret = process.env.TURNSTILE_SECRET_KEY!
-  const sendData = new FormData()
-  sendData.append('secret', secret)
-  sendData.append('response', token)
-  const response = await fetch(
-    `https://challenges.cloudflare.com/turnstile/v0/siteverify`,
-    {
-      body: sendData,
-      method: 'POST',
-    },
-  )
-  const data = await response.json()
+// export type FormState = {
+//   message: string
+//   fields?: Record<string, string>
+//   issues?: Array<string>
+// }
 
-  return data.success
-}
 export const onSubmitHandler = createServerFn()
   .validator((data: unknown) => {
     return formSchema.parse(data)
   })
   .handler(async (ctx) => {
+    console.log('handler', process.env.RESEND_API_KEY)
     const parsed = formSchema.safeParse(ctx.data)
     const resend = new Resend(process.env.RESEND_API_KEY)
 
-    console.log(ctx.data)
+    const validateHuman = async (token: string): Promise<boolean> => {
+      const secret = import.meta.env.TURNSTILE_SECRET_KEY!
+      const sendData = new FormData()
+      sendData.append('secret', secret)
+      sendData.append('response', token)
+      const response = await fetch(
+        `https://challenges.cloudflare.com/turnstile/v0/siteverify`,
+        {
+          body: sendData,
+          method: 'POST',
+        },
+      )
+      const data = await response.json()
+
+      return data.success
+    }
+
+    // console.log(ctx.data)
 
     if (!parsed.success) {
       return {

@@ -5,8 +5,8 @@ import { PostHogProvider } from 'posthog-js/react'
 
 function PHProvider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
-    posthog.init(process.env.VITE_PUBLIC_POSTHOG_KEY!, {
-      api_host: process.env.VITE_PUBLIC_POSTHOG_HOST,
+    posthog.init(import.meta.env.VITE_POSTHOG_KEY!, {
+      api_host: import.meta.env.VITE_POSTHOG_HOST,
       person_profiles: 'always',
       capture_pageview: false, // Disable automatic pageview capture, as we capture manually
     })

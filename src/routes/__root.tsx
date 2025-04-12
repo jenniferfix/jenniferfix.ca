@@ -5,18 +5,15 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ThemeProvider } from '@/components/theme-provider'
-import FloatingTheme from '@/components/FloatingTheme'
+import TanstackQueryLayout from '../integrations/tanstack-query/layout'
+import appCss from '../styles.css?url'
+import type { QueryClient } from '@tanstack/react-query'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
 // import PostHogProvider from '@/components/posthog/PostHogProvider'
 // import PostHogPageViewWrapper from '@/components/posthog/PostHogPageViewWrapper'
-
-import TanstackQueryLayout from '../integrations/tanstack-query/layout'
-
-import appCss from '../styles.css?url'
-
-import type { QueryClient } from '@tanstack/react-query'
+import FloatingTheme from '@/components/FloatingTheme'
+import { ThemeProvider } from '@/components/theme-provider'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -41,6 +38,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         rel: 'stylesheet',
         href: appCss,
       },
+      {
+        rel: 'icon',
+        href: '/favicon.png',
+      },
     ],
   }),
 
@@ -58,12 +59,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <HeadContent />
         <script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
           defer
           async
         />
+        <HeadContent />
       </head>
       <body>
         {/* <PostHogProvider> */}

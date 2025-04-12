@@ -37,7 +37,7 @@ const Hero = () => {
       className="flex justify-center items-center min-h-screen snap-start"
     >
       <div className="">
-        <div className="text-2xl fira-code-normal">
+        <div className="text-2xl font-code">
           <Typer text="Hello, World" delay={200} />
         </div>
         <div className="text-5xl my-2">
