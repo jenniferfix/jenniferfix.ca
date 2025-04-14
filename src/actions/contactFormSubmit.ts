@@ -4,19 +4,21 @@ import { createServerFn } from '@tanstack/react-start'
 import { EmailTemplate } from '@/components/email-template'
 import { formSchema } from '@/schemas'
 
+const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
+
 // export type FormState = {
 //   message: string
 //   fields?: Record<string, string>
 //   issues?: Array<string>
 // }
 
-export const onSubmitHandler = createServerFn()
+export const onSubmitHandler = createServerFn({ method: 'POST' })
   .validator((data: unknown) => {
     return formSchema.parse(data)
   })
   .handler(async (ctx) => {
-    console.log('handler', process.env.RESEND_API_KEY)
     const parsed = formSchema.safeParse(ctx.data)
+
     const resend = new Resend(process.env.RESEND_API_KEY)
 
     const validateHuman = async (token: string): Promise<boolean> => {
@@ -45,11 +47,14 @@ export const onSubmitHandler = createServerFn()
     }
 
     // lets verify the cloudflare token
-    const token = ctx.data['cf-turnstile-response']
-    if (!token) return { message: 'Invalid token' }
-    const isHuman = await validateHuman(token.toString())
-    if (!isHuman) {
-      return { message: 'Error, maybe not human' }
+    if (!isDev) {
+      const token = ctx.data['cf-turnstile-response']
+      if (!token) return { message: 'Invalid token' }
+
+      const isHuman = await validateHuman(token.toString())
+      if (!isHuman) {
+        return { message: 'Error, maybe not human' }
+      }
     }
 
     try {

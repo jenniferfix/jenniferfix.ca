@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { useServerFn } from '@tanstack/react-start'
 import Turnstile from 'react-turnstile'
 import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
@@ -19,6 +20,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { formSchema } from '@/schemas'
 import { onSubmitHandler } from '@/actions/contactFormSubmit'
 
+const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
+
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
@@ -32,7 +35,6 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
       message: '',
     },
     onSubmit: ({ value }) => {
-      console.log('submitted', value)
       onSubmitHandler({ data: value })
     },
   })
@@ -81,7 +83,6 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
               ref={formRef}
               onSubmit={(e) => {
                 e.preventDefault()
-                console.log('onsubmit')
                 form.handleSubmit()
               }}
               className=""
@@ -163,10 +164,12 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                 )}
               />
               <div className="flex justify-center items-center">
-                <Turnstile
-                  sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                  fixedSize={true}
-                />
+                {!isDev && (
+                  <Turnstile
+                    sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                    fixedSize={true}
+                  />
+                )}
               </div>
               <div className="flex justify-end gap-2 mt-2">
                 <DialogClose asChild>
