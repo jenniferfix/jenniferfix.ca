@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useServerFn } from '@tanstack/react-start'
-import Turnstile from 'react-turnstile'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -166,8 +166,7 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
               <div className="flex justify-center items-center">
                 {!isDev && (
                   <Turnstile
-                    sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                    fixedSize={true}
+                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                   />
                 )}
               </div>

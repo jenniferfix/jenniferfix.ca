@@ -59,11 +59,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-          defer
-          async
-        />
+        {/* <script */}
+        {/*   src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" */}
+        {/*   defer */}
+        {/*   async */}
+        {/* /> */}
         <HeadContent />
       </head>
       <body>
