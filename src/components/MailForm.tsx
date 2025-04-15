@@ -33,6 +33,7 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
       email: '',
       subject: '',
       message: '',
+      'cf-turnstile-response': '',
     },
     onSubmit: ({ value }) => {
       onSubmitHandler({ data: value })
@@ -168,6 +169,9 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                   sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                   onError={(error) => {
                     console.error('Turnstile error:', error)
+                    toast.error(
+                      'CAPTCHA verification failed. Please try again.',
+                    )
                   }}
                 />
               </div>

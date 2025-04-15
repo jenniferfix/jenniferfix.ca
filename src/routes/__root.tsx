@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   HeadContent,
   Outlet,
@@ -17,6 +18,12 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 interface MyRouterContext {
   queryClient: QueryClient
+}
+
+declare global {
+  interface Window {
+    onloadTurnstileCallback: () => void
+  }
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -62,6 +69,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  React.useEffect(() => {
+    window.onloadTurnstileCallback = () => {
+      console.log('Turnstile script loaded sucessfully')
+    }
+  }, [])
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
