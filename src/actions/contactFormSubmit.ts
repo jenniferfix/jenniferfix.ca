@@ -47,19 +47,17 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
     }
 
     // lets verify the cloudflare token
-    if (!isDev) {
-      const token = ctx.data['cf-turnstile-response']
-      if (!token) return { message: 'Invalid token' }
+    const token = ctx.data['cf-turnstile-response']
+    if (!token) return { message: 'Invalid token' }
 
-      const isHuman = await validateHuman(token.toString())
-      if (!isHuman) {
-        return { message: 'Error, maybe not human' }
-      }
+    const isHuman = await validateHuman(token.toString())
+    if (!isHuman) {
+      return { message: 'Error, maybe not human' }
     }
 
     try {
       const { data, error } = await resend.emails.send({
-        from: `${parsed.data.name} <no-reply@jenniferfix.ca>`,
+        from: `${parsed.data.name} <no-reply@jenn.fyi>`,
         to: ['jenniferashleyfix@gmail.com'],
         subject: `WebForm: ${parsed.data.subject}`,
         react: EmailTemplate({

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useServerFn } from '@tanstack/react-start'
-import { Turnstile } from '@marsidev/react-turnstile'
+import Turnstile, { useTurnstile } from 'react-turnstile'
 import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -164,11 +164,12 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                 )}
               />
               <div className="flex justify-center items-center">
-                {!isDev && (
-                  <Turnstile
-                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                  />
-                )}
+                <Turnstile
+                  sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onError={(error) => {
+                    console.error('Turnstile error:', error)
+                  }}
+                />
               </div>
               <div className="flex justify-end gap-2 mt-2">
                 <DialogClose asChild>

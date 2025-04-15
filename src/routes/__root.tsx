@@ -21,6 +21,13 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
+    scripts: [
+      {
+        src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback',
+        defer: true,
+        async: true,
+      },
+    ],
     meta: [
       {
         charSet: 'utf-8',
@@ -44,7 +51,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
-
   component: () => (
     <RootDocument>
       <Outlet />
@@ -59,11 +65,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <script */}
-        {/*   src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" */}
-        {/*   defer */}
-        {/*   async */}
-        {/* /> */}
         <HeadContent />
       </head>
       <body>
