@@ -54,7 +54,7 @@ export async function onSubmitAction(
 
   try {
     const { data, error } = await resend.emails.send({
-      from: `${parsed.data.name} <no-reply@jenniferfix.ca>`,
+      from: `${parsed.data.name} <no-reply@jenn.fyi>`,
       to: ['jenniferashleyfix@gmail.com'],
       subject: `WebForm: ${parsed.data.subject}`,
       react: EmailTemplate({
