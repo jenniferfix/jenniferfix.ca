@@ -6,6 +6,8 @@ import { formSchema } from '@/schemas'
 
 const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
 
+// TODO: reimplement this
+
 // export type FormState = {
 //   message: string
 //   fields?: Record<string, string>
@@ -22,7 +24,7 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
     const resend = new Resend(process.env.RESEND_API_KEY)
 
     const validateHuman = async (token: string): Promise<boolean> => {
-      const secret = import.meta.env.TURNSTILE_SECRET_KEY!
+      const secret = process.env.TURNSTILE_SECRET_KEY!
       const sendData = new FormData()
       sendData.append('secret', secret)
       sendData.append('response', token)
@@ -38,7 +40,7 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
       return data.success
     }
 
-    // console.log(ctx.data)
+    console.log(ctx.data)
 
     if (!parsed.success) {
       return {

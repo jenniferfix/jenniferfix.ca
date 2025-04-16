@@ -24,6 +24,10 @@ const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
 
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
+  const submitHandler = useServerFn(onSubmitHandler)
+  const [verified, setVerified] = React.useState(false)
+  const [sent, setSent] = React.useState(false)
+  const [message, setMessage] = React.useState('')
 
   // const [state, formAction] = useActionState(onSubmitHandler, { message: '' })
 
@@ -35,8 +39,10 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
       message: '',
       'cf-turnstile-response': '',
     },
-    onSubmit: ({ value }) => {
-      onSubmitHandler({ data: value })
+    onSubmit: async ({ value }) => {
+      const res = await submitHandler({ data: value })
+      //  TODO: Finish getting all message and error responses back in
+      setMessage(res.message)
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -47,12 +53,11 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
     toast('Message sent!')
   }, [form, toast])
 
-  // React.useEffect(() => {
-  //   if (state?.message === 'Sent') {
-  //     reset()
-  //   }
-  // }, [state, reset])
-  //
+  React.useEffect(() => {
+    if (message === 'Sent') {
+      reset()
+    }
+  }, [message, reset])
 
   return (
     <React.Fragment>
@@ -164,24 +169,31 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
                   </div>
                 )}
               />
-              <div className="flex justify-center items-center">
-                <Turnstile
-                  sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                  onError={(error) => {
-                    console.error('Turnstile error:', error)
-                    toast.error(
-                      'CAPTCHA verification failed. Please try again.',
-                    )
-                  }}
-                />
-              </div>
+              <form.Field
+                name="cf-turnstile-response"
+                children={(field) => (
+                  <Turnstile
+                    sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                    onError={(error) => {
+                      console.error('Turnstile error:', error)
+                      toast.error(
+                        'CAPTCHA verification failed. Please try again.',
+                      )
+                    }}
+                    onVerify={(token) => {
+                      setVerified(true)
+                      field.handleChange(token)
+                    }}
+                  />
+                )}
+              />
               <div className="flex justify-end gap-2 mt-2">
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
                     Cancel
                   </Button>
                 </DialogClose>
-                <Button type="submit" variant="default">
+                <Button type="submit" variant="default" disabled={!verified}>
                   Submit
                 </Button>
               </div>

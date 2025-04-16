@@ -30,7 +30,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     scripts: [
       {
-        src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback',
+        src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit',
         defer: true,
         async: true,
       },
@@ -71,7 +71,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootDocument({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     window.onloadTurnstileCallback = () => {
-      console.log('Turnstile script loaded sucessfully')
+      // console.log('Turnstile script loaded sucessfully')
     }
   }, [])
   return (
