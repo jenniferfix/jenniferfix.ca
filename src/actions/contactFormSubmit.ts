@@ -4,23 +4,12 @@ import { createServerFn } from '@tanstack/react-start'
 import { EmailTemplate } from '@/components/email-template'
 import { formSchema } from '@/schemas'
 
-const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
-
-// TODO: reimplement this
-
-// export type FormState = {
-//   message: string
-//   fields?: Record<string, string>
-//   issues?: Array<string>
-// }
-
 export const onSubmitHandler = createServerFn({ method: 'POST' })
   .validator((data: unknown) => {
     return formSchema.parse(data)
   })
   .handler(async (ctx) => {
     const parsed = formSchema.safeParse(ctx.data)
-
     const resend = new Resend(process.env.RESEND_API_KEY)
 
     const validateHuman = async (token: string): Promise<boolean> => {
@@ -36,11 +25,10 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
         },
       )
       const data = await response.json()
-
       return data.success
     }
 
-    console.log(ctx.data)
+    // console.log(ctx.data)
 
     if (!parsed.success) {
       return {
@@ -52,9 +40,13 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
     const token = ctx.data['cf-turnstile-response']
     if (!token) return { message: 'Invalid token' }
 
-    const isHuman = await validateHuman(token.toString())
-    if (!isHuman) {
-      return { message: 'Error, maybe not human' }
+    try {
+      const isHuman = await validateHuman(token.toString())
+      if (!isHuman) {
+        return { message: 'Error, maybe not human' }
+      }
+    } catch (error) {
+      console.error(error)
     }
 
     try {
@@ -74,11 +66,10 @@ export const onSubmitHandler = createServerFn({ method: 'POST' })
         return {
           message:
             'Email send error, please try again. Error: ' + error.message,
-          fields: parsed.data,
         }
       }
     } catch (error) {
-      return { message: 'Error 500', fields: parsed.data }
+      throw new Error('Error 500')
     }
 
     return { message: 'Sent' }

@@ -20,16 +20,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { formSchema } from '@/schemas'
 import { onSubmitHandler } from '@/actions/contactFormSubmit'
 
-const isDev = process.env.NODE_ENV === 'development' || import.meta.env.DEV
-
 const MailForm = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const submitHandler = useServerFn(onSubmitHandler)
   const [verified, setVerified] = React.useState(false)
   const [sent, setSent] = React.useState(false)
   const [message, setMessage] = React.useState('')
-
-  // const [state, formAction] = useActionState(onSubmitHandler, { message: '' })
 
   const form = useForm({
     defaultValues: {
@@ -40,9 +36,13 @@ const MailForm = ({ children }: { children: React.ReactNode }) => {
       'cf-turnstile-response': '',
     },
     onSubmit: async ({ value }) => {
-      const res = await submitHandler({ data: value })
+      try {
+        const res = await submitHandler({ data: value })
+        setMessage(res.message)
+      } catch (error) {
+        console.error(error)
+      }
       //  TODO: Finish getting all message and error responses back in
-      setMessage(res.message)
     },
   })
   const formRef = React.useRef<HTMLFormElement>(null)
