@@ -13,8 +13,8 @@ function App() {
   return (
     <main id="main" className="snap-y snap-mandatory overflow-y-auto h-screen">
       <Hero />
-      <Bio />
       <Portfolio />
+      <Bio />
       <Resume />
       <More />
     </main>
