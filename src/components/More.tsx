@@ -4,51 +4,46 @@ import { FaAnglesDown } from 'react-icons/fa6'
 import { cn } from '@/lib/utils'
 
 const More = () => {
-  const [isTop, setIsTop] = React.useState<boolean | null>(null)
-  const ref = React.useRef<HTMLDivElement>(null)
+  const [scrollPos, setScrollPos] = React.useState(0)
+  const [show, setShow] = React.useState(true)
 
   React.useEffect(() => {
-    const mainElement = document.getElementById('main') as HTMLElement
-
-    if (!ref.current) {
-      return
+    if (scrollPos > 0) {
+      setShow(false)
+    } else {
+      setShow(true)
     }
+  }, [scrollPos])
 
+  React.useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = ref.current?.scrollTop
-      setIsTop(scrollTop === 0)
+      const mainElement = document.getElementById('main')
+      if (mainElement) {
+        setScrollPos(mainElement.scrollTop)
+      }
     }
-
     handleScroll()
 
-    mainElement.addEventListener('scroll', handleScroll, { passive: true })
+    const mainElement = document.getElementById('main')
+    if (mainElement) {
+      mainElement.addEventListener('scroll', handleScroll, { passive: true })
+    }
 
-    return () => mainElement.removeEventListener('scroll', handleScroll)
+    return () => {
+      if (mainElement) mainElement.removeEventListener('scroll', handleScroll)
+    }
   }, [])
-
-  React.useEffect(() => {
-    if (!ref.current) return
-    if (isTop) {
-      clearTimeout(parseInt(ref.current.dataset.timeout || ''))
-      ref.current.dataset.state = 'show'
-      ref.current.style.display = ''
-    }
-    if (!isTop) {
-      ref.current.dataset.state = 'hidden'
-      const timeoutId = setTimeout(() => {
-        if (ref.current) {
-          ref.current.style.display = 'none'
-        }
-      }, 300)
-      ref.current.dataset.timeout = timeoutId.toString()
-    }
-  }, [isTop, ref])
 
   return (
     <div
-      ref={ref}
+      data-state={show ? 'visible' : 'hidden'}
       className={cn(
-        'opacity-25 text-sm absolute bottom-2 inset-x-0 w-fit mx-auto bg-popover text-popover-foreground border py-1 px-2 rounded flex items-center gap-1 data-[state=show]:animate-in data-[state=show]:fade-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out duration-300',
+        'data-[state=visible]:animate-in data-[state=hidden]:animate-out',
+        'data-[state=visible]:fade-in-25 data-[state=hidden]:fade-out-0',
+        'data-[state=visible]:slide-in-from-bottom data-[state=hidden]:slide-out-to-bottom-0',
+        'text-sm absolute bottom-2 inset-x-0 w-fit mx-auto bg-popover text-popover-foreground border py-1 px-2 rounded flex items-center gap-1',
+        show ? 'opacity-25' : 'opacity-0 pointer-events-none',
+        show ? 'translate-y-0' : 'translate-y-4',
       )}
     >
       More <FaAnglesDown className="inline-block" />

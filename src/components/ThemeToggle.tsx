@@ -11,27 +11,49 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
 
 export function ThemeToggle() {
   const { setTheme } = useTheme()
   const [scrollPos, setScrollPos] = React.useState(0)
+  const [show, setShow] = React.useState(true)
+
+  React.useEffect(() => {
+    if (scrollPos > 0) {
+      setShow(false)
+    } else {
+      setShow(true)
+    }
+  }, [scrollPos])
 
   React.useEffect(() => {
     const handleScroll = () => {
-      console.log('test')
-      setScrollPos(window.scrollY || window.pageYOffset)
+      const mainElement = document.getElementById('main')
+      if (mainElement) {
+        setScrollPos(mainElement.scrollTop)
+      }
+    }
+    handleScroll()
+
+    const mainElement = document.getElementById('main')
+    if (mainElement) {
+      mainElement.addEventListener('scroll', handleScroll, { passive: true })
     }
 
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      if (mainElement) mainElement.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          {scrollPos}
+        <Button
+          data-state={show ? 'visible' : 'hidden'}
+          variant="ghost"
+          size="icon"
+          className="data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=visible]:fade-in-0 data-[state=hidden]:fade-out-0 data-[state=visible]:visible data-[state=hidden]:invisible duration-1000"
+        >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
