@@ -1,11 +1,12 @@
 import React from 'react'
+import { FaGithub } from 'react-icons/fa6'
 import {
   Card,
   CardContent,
-  CardTitle,
-  CardHeader,
-  CardFooter,
   CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,7 +14,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { FaGithub } from 'react-icons/fa6'
 
 type Project = {
   name: string
@@ -22,7 +22,7 @@ type Project = {
   demo?: string
   screenshot?: string
 }
-const projects: Project[] = [
+const projects: Array<Project> = [
   {
     name: 'Emoji Invaders',
     description:
