@@ -46,6 +46,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         title: "Jennifer's Home on the Internet",
       },
+      {
+        name: 'description',
+        content:
+          "Jennifer's Home on the Internet. Jenn is an aspiring full stack developer",
+      },
     ],
     links: [
       {
